@@ -4,18 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeLadder
+namespace SnakeLadderProblem_CS
 {
     class SnakeLadder
     {
-        //initializing instance variable
+        //UC6 number of times dice was played
+        //instance variable
+        public static int start = 0;
         public static int position = 0;
-        //UC4 till player reaches 100 position in Snake ladder game 
-        //Generating a random no using Random method()
+        public static int winPosition = 100;
+        public static int diceRollNum = 0;
+
+
+        //using Random method generate random values
         public static int CheckDice()
         {
             Random random = new Random();
-            int CheckDice = random.Next(1, 6);
+            int CheckDice = random.Next(1, 7);
             Console.WriteLine("Dice number:" + CheckDice);
             return CheckDice;
         }
@@ -32,43 +37,54 @@ namespace SnakeLadder
                     break;
                 case 1:
                     Console.WriteLine("Snake");
-                    position -= dice;
-                    Console.WriteLine("Player current position" + position);
+                    if ((position - dice) < start)
+                    {
+                        Console.WriteLine("Restart the game");
+                        position = start;
+                        Console.WriteLine("Player current position" + position);
+                    }
+                    else
+                    {
+                        position -= dice;
+                        Console.WriteLine("Player current position" + position);
+                    }
                     break;
                 case 2:
                     Console.WriteLine("Ladder");
-                    position += dice;
+                    if ((position + dice) > winPosition)
+                    {
+                        Console.WriteLine("Player position is above 100");
+                        position -= dice;
+                        Console.WriteLine("Player current position" + position);
+                    }
+                    else if ((position + dice) == winPosition)
+                    {
+                        Console.WriteLine("Wins the game");
+                        position = winPosition;
+                        Console.WriteLine("Player current position" + position);
+                    }
+                    else
+                    {
+                        position += dice;
+                        Console.WriteLine("Player current position" + position);
+                    }
                     break;
             }
         }
 
         public static void WinningPosition()
         {
-            //local variable
-            int winPosition = 100;
             //Repetation loop till reach winposition
-            while (position <= winPosition)
+            while (position < winPosition)
             {
                 SnakeLadder.CheckOption();
-                if (position == winPosition)
-                {
-                    Console.WriteLine("Player current position" + position);
-                }
-
-                else if (position < 0)
-                {
-                    Console.WriteLine("Restart the game");
-                    Console.WriteLine("Player current position" + position);
-                }
-                else
-                {
-                    Console.WriteLine("Player current position" + position);
-                }
+                diceRollNum++;
             }
         }
         static void Main(string[] args)
         {
             SnakeLadder.WinningPosition();
+            Console.WriteLine("Number of times dice rolled:" + diceRollNum);
             Console.ReadLine();
         }
     }
