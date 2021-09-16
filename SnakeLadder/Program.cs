@@ -8,15 +8,17 @@ namespace SnakeLadder
 {
     class SnakeLadder
     {
-        public static void Position()
+        //UC2 Rolls a Dice
+        public static void CheckDice()
         {
-            int position = 0;
-            Console.WriteLine("Player is at start position:" + position);
+            Random random = new Random();
+            int CheckDice = random.Next(1, 6);
+            Console.WriteLine("The player rolls a dice:" + CheckDice);
         }
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Single player");
-            SnakeLadder.Position();
+            SnakeLadder.CheckDice();
             Console.ReadLine();
         }
     }
