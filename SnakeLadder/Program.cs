@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SnakeLadderProblem_CS
-{
+{ 
     class SnakeLadder
     {
-        //UC6 number of times dice was played
-        //instance variable
+        //UC7 Two players
+        // instance variable
         public static int start = 0;
         public static int position = 0;
         public static int winPosition = 100;
-        public static int diceRollNum = 0;
-
 
         //using Random method generate random values
         public static int CheckDice()
@@ -78,13 +76,39 @@ namespace SnakeLadderProblem_CS
             while (position < winPosition)
             {
                 SnakeLadder.CheckOption();
-                diceRollNum++;
             }
+        }
+
+        public static void TwoPlayer()
+        {
+            while (true)
+            {
+                Random random = new Random();
+                int checkTurn = random.Next(1, 3);
+                if (checkTurn == 1)
+                {
+                    SnakeLadder.WinningPosition();
+                    if (position == winPosition)
+                    {
+                        Console.WriteLine("Player1 Won");
+                        break;
+                    }
+                }
+                if (checkTurn == 2)
+                {
+                    SnakeLadder.WinningPosition();
+                    if (position == winPosition)
+                    {
+                        Console.WriteLine("Player2 Won");
+                        break;
+                    }
+                }
+            }
+
         }
         static void Main(string[] args)
         {
-            SnakeLadder.WinningPosition();
-            Console.WriteLine("Number of times dice rolled:" + diceRollNum);
+            SnakeLadder.TwoPlayer();
             Console.ReadLine();
         }
     }
