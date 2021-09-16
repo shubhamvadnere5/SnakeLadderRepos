@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace SnakeLadderProblem_CS
 {
-    //UC5 playes gets exact winning position 100
     class SnakeLadder
     {
-        
+        //UC6 number of times dice was played
         //instance variable
         public static int start = 0;
         public static int position = 0;
         public static int winPosition = 100;
+        public static int diceRollNum = 0;
 
 
-        //using random method generating random values
+        //using Random method generate random values
         public static int CheckDice()
         {
             Random random = new Random();
-            int CheckDice = random.Next(1, 6);
+            int CheckDice = random.Next(1, 7);
             Console.WriteLine("Dice number:" + CheckDice);
             return CheckDice;
         }
@@ -78,11 +78,13 @@ namespace SnakeLadderProblem_CS
             while (position < winPosition)
             {
                 SnakeLadder.CheckOption();
+                diceRollNum++;
             }
         }
         static void Main(string[] args)
         {
             SnakeLadder.WinningPosition();
+            Console.WriteLine("Number of times dice rolled:" + diceRollNum);
             Console.ReadLine();
         }
     }
